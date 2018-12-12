@@ -6,22 +6,18 @@ States MainWindow::Action(States s, uint8_t key)
 	switch(key){
 		case 200:{
 			DecLine();
-			Draw();
 			return sMainWindowNavi;
 		};
 		case 201:{
 			IncLine();
-			Draw();
 			return sMainWindowNavi;
 		};
 		case 202:{
 			DecCol();
-			Draw();
 			return sMainWindowNavi;
 		};
 		case 203:{
 			IncCol();
-			Draw();
 			return sMainWindowNavi;
 		};
 		case 204:{
@@ -30,7 +26,7 @@ States MainWindow::Action(States s, uint8_t key)
 			return sMainWindowCell;
 		};
 		case 205:{
-			addressedCells = ActLine() * 11 + ActColumn();
+			addressedCells = (ActLine() + 1) * 10 + ActColumn();
 			Text.ClrScr();
 			return sMainWindowCell;
 		};
@@ -40,7 +36,7 @@ States MainWindow::Action(States s, uint8_t key)
 			return sMainWindowCell;
 		};
 		case 207:{
-			addressedCells = ActLine() * 11 + ActColumn()+1;
+			addressedCells = (ActLine() + 1) * 10 + ActColumn()+1;
 			Text.ClrScr();
 			return sMainWindowCell;
 		};
@@ -54,7 +50,6 @@ States MainWindow::Action(States s, uint8_t key)
 
 void MainWindow::Draw(void)
 {
-	Text.ClrScr();
 	Text.SetSpaces(1);
 	Text.GoTo(0,0);
 	
@@ -97,24 +92,6 @@ uint8_t MainWindow::ReadKey(void)
 {
 	return k.ReadKey(k.kt, touch.ReadKey());
 };
-
-
-bool MainWindow::IsCellKey(uint8_t key)
-{
-	if( (key > 203) && (key < 208) ){
-		return true;
-	};
-	return false;
-};
-
-
-bool MainWindow::IsNavigateKey(uint8_t key)
-{
-	if( (key > 199) && (key < 204) ){
-		return true;
-	};
-	return false;
-}
 
 void MainWindow::DecLine(void)
 {

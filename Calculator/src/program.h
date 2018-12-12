@@ -17,21 +17,23 @@
 #include <WindowsInterface.h>
 
 class Program{
-public:
+	public:
 	WindowsInterface* windowsInterface;
 	MainWindow mainWindow;
 	InputWindow inputWindow;
 	Sheet sheet;
+	array<uint8_t> inputString;
+	
 	uint8_t key;
 	
 	States state;
 
-	Program():windowsInterface(&mainWindow), key(0), state(sMainWindow){
+	Program():windowsInterface(&mainWindow), inputString(90), key(0), state(sMainWindow){
 		mainWindow.Draw();
 	};
 	
 	void Run(void);
-		
+	void WriteRawInput(void);
 };
 
 #endif // program_h__

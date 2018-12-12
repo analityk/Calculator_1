@@ -90,19 +90,16 @@ template < class T > class array{
 	};
 	
 	void DelLastChar(void){
-		poz--;
-		if( poz == 0 ){
-			data[0] = 0;
-			return;
-		};
-		data[poz] = 0;
-		
-	}
+		if( poz >= 1 ){
+			data[poz-1] = 0;
+			poz--;
+		};				
+	};
 	
 	uint8_t free_space(void){
 		if( _destroy )return;
 		return (rozm - poz);
-	}
+	};
 	
 	uint8_t size(void){
 		if( _destroy )return 0;

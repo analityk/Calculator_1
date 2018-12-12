@@ -33,17 +33,17 @@ uint16_t Touch::rescale_y(uint16_t y)
 void Touch::wait_release_key(void)
 {
 	touch.delay_keypressed();
-	delay(0x10000);
+	delay(0x20000);
 };
 
 void Touch::KeyPressed(void)
 {
-	while( ( Adc.current_X() + Adc.current_Y() ) < 670 ){};
+	while( ( Adc.current_X() + Adc.current_Y() ) < 680 ){};
 }
 
 bool Touch::Press(void)
 {
-	if( Adc.current_X() + Adc.current_Y() < 670 ){
+	if( Adc.current_X() + Adc.current_Y() < 680 ){
 		return true;
 	};
 	return false;

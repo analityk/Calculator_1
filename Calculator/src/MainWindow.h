@@ -10,8 +10,8 @@
 #include <WindowsInterface.h>
 
 
-#define LINE_CNT_MAX	9
-#define COLUMN_CNT_MAX	9
+#define LINE_CNT_MAX	8
+#define COLUMN_CNT_MAX	8
 
 class MainWindow: public WindowsInterface{
 public:
@@ -29,8 +29,6 @@ public:
 	virtual uint8_t ReadKey(void);
 	virtual void Draw(void);
 	
-	bool IsCellKey(uint8_t key);
-	bool IsNavigateKey(uint8_t key);
 	void DecLine(void);
 	void IncLine(void);
 	void DecCol(void);
