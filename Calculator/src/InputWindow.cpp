@@ -2,6 +2,7 @@
 
 void InputWindow::Draw(void)
 {
+	Text.ClrScr();
 	Text.SetSpaces(1);
 	Text.GoTo(0,0);
 	Text.Write("             REF \x81 OK\n");
@@ -35,7 +36,24 @@ void InputWindow::Draw(void)
 
 
 States InputWindow::Action(States s, uint8_t key)
-{
+{	
+	//if( (key > 32) && (key < 127) ){
+		//inputString.insert(key);
+		//
+	//};
+	
+	switch(key){
+		case 200:{
+			inputString.erase();
+			return sInputWindowCLR;
+		};
+		case 205:{
+			Text.ClrScr();
+			return sInputWindowOK;
+		};
+		default:break;
+	};
+	
 	return sInputWindow;
 };
 

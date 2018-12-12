@@ -2,3 +2,6 @@
 *.d
 *.hex
 *.elf
+*.lss
+*.map
+*.srec

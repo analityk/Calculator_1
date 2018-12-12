@@ -26,18 +26,22 @@ States MainWindow::Action(States s, uint8_t key)
 		};
 		case 204:{
 			addressedCells = ActLine() * 10 + ActColumn();
+			Text.ClrScr();
 			return sMainWindowCell;
 		};
 		case 205:{
 			addressedCells = ActLine() * 11 + ActColumn();
+			Text.ClrScr();
 			return sMainWindowCell;
 		};
 		case 206:{
 			addressedCells = ActLine() * 10 + ActColumn()+1;
+			Text.ClrScr();
 			return sMainWindowCell;
 		};
 		case 207:{
 			addressedCells = ActLine() * 11 + ActColumn()+1;
+			Text.ClrScr();
 			return sMainWindowCell;
 		};
 		case 208:{
@@ -50,6 +54,7 @@ States MainWindow::Action(States s, uint8_t key)
 
 void MainWindow::Draw(void)
 {
+	Text.ClrScr();
 	Text.SetSpaces(1);
 	Text.GoTo(0,0);
 	

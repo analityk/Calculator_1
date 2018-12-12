@@ -22,12 +22,11 @@ public:
 	MainWindow mainWindow;
 	InputWindow inputWindow;
 	Sheet sheet;
-	
 	uint8_t key;
 	
 	States state;
 
-	Program():windowsInterface(&mainWindow),key(0), state(sMainWindow){
+	Program():windowsInterface(&mainWindow), key(0), state(sMainWindow){
 		mainWindow.Draw();
 	};
 	
