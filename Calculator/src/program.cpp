@@ -1,15 +1,21 @@
 ﻿#include <program.h>
+#include <array.h>
 
 void Program::Run(void)
 {
 	while(1){
 		
 		state = windowsInterface->Action(state, windowsInterface->ReadKey() );
-		
+				
 		switch(state){
 			case sMainWindowCell:{
 				state = sInputWindow;
+				
 				inputWindow.addressedCell = mainWindow.addressedCells;
+				addressedCell = mainWindow.addressedCells;
+				
+				cells[addressedCell].Load(&inputString);
+				
 				windowsInterface = &inputWindow;
 				windowsInterface->Draw();
 				break;
@@ -24,41 +30,47 @@ void Program::Run(void)
 			case sInputWindowAscii:{
 				state = sInputWindow;
 				inputString.insert(inputWindow.inputKey);
-				WriteRawInput();
+				windowsInterface->Draw();
 				break;
 			};
 			
 			case sInputWindowOK:{
 				state = sMainWindow;
+				cells[addressedCell].Store(&inputString);				
 				windowsInterface = &mainWindow;
 				windowsInterface->Draw();
-				
-				inputString.erase();
 				break;
 			};
 			
 			case sInputWindowCLR:{
 				state = sInputWindow;
-				windowsInterface->Draw();
 				inputString.erase();
+				windowsInterface->Draw();
 				break;
 			};
 			
 			case sInputWindowBackspace:{
 				state = sInputWindow;
-				windowsInterface->Draw();
 				inputString.DelLastChar();
-				WriteRawInput();
+				windowsInterface->Draw();
 				break;
 			};
-			
+	
 			default:break;
+			
+			case sMainWindow:
+			break;
+			case sMainWindowOptions:
+			break;
+			case sInputWindowHelp:
+			break;
+			case sInputWindowBase:
+			break;
+			case sInputWindowReference:
+			break;
+			case sInputWindow:
+			break;
 		};
 	};
-};
-
-void Program::WriteRawInput(void){
-	Text.GoTo(1,1);
-	Text.Write(inputString);
 };
 

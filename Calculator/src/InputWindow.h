@@ -16,11 +16,10 @@ class InputWindow: public WindowsInterface{
 	Keys k;
 	uint8_t inputKey;
 	
-	uint8_t letter;
-	uint8_t row;
 	uint8_t addressedCell;
+	array<uint8_t>* rawInputString;
 
-	InputWindow():k(InputKeys), inputKey(0), letter(255), row(255), addressedCell(255) {};
+	InputWindow():k(InputKeys), inputKey(0), addressedCell(255) {};
 
 	virtual States Action(States s, uint8_t key);
 	virtual uint8_t ReadKey(void);

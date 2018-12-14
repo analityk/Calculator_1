@@ -67,6 +67,10 @@ void InputWindow::Draw(void)
 		Text.GoTo(4,0);
 		Text.Write(t);
 	};
+	
+	Text.GoTo(1,1);
+	Text.Write((char*)(rawInputString->data));
+	
 };
 
 uint8_t InputWindow::ReadKey(void)

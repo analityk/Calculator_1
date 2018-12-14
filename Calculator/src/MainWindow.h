@@ -2,11 +2,13 @@
 #define MainWindow_h__
 
 #include <avr/io.h>
+#include <stdio.h>
 #include <text.h>
 #include <pair.h>
 #include <keys.h>
 #include <states.h>
 #include <touch.h>
+#include <cell.h>
 #include <WindowsInterface.h>
 
 
@@ -18,6 +20,7 @@ public:
 
 	Keys k;
 	
+	Cell* pc;
 	uint8_t column;
 	uint8_t line;
 	uint8_t addressedCells;
@@ -28,6 +31,8 @@ public:
 	virtual States Action(States s, uint8_t key);
 	virtual uint8_t ReadKey(void);
 	virtual void Draw(void);
+	
+	void FormatOutput(double* pd, uint8_t* ps);
 	
 	void DecLine(void);
 	void IncLine(void);

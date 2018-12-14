@@ -297,7 +297,7 @@ void evaluate(array<Token>& tk){
 	};
 };
 
-double RPN::infix_to_postfix(array<uint8_t>& r)
+double RPN::TryCalculate(array<uint8_t>& r)
 {
 	tokenizer(r);
 	

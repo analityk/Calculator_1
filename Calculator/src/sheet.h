@@ -2,7 +2,6 @@
 #define sheet_h__
 
 #include <avr/io.h>
-#include <mtype.h>
 #include <cell.h>
 
 class Sheet{

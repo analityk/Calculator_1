@@ -33,17 +33,17 @@ uint16_t Touch::rescale_y(uint16_t y)
 void Touch::wait_release_key(void)
 {
 	touch.delay_keypressed();
-	delay(0x20000);
+	delay(0x18000);
 };
 
 void Touch::KeyPressed(void)
 {
-	while( ( Adc.current_X() + Adc.current_Y() ) < 680 ){};
+	while( ( Adc.current_X() + Adc.current_Y() ) < 670 ){};
 }
 
 bool Touch::Press(void)
 {
-	if( Adc.current_X() + Adc.current_Y() < 680 ){
+	if( Adc.current_X() + Adc.current_Y() < 670 ){
 		return true;
 	};
 	return false;
@@ -51,12 +51,12 @@ bool Touch::Press(void)
 
 void Touch::ReadCoordinates(void)
 {
-	uint16_t tx[5];
-	uint16_t ty[5];
+	uint16_t tx[10];
+	uint16_t ty[10];
 	
 	KeyPressed();
 	
-	for(uint8_t i=0; i<5; i++){
+	for(uint8_t i=0; i<10; i++){
 		tx[i] = Adc.voltage_Y();
 		ty[i] = Adc.voltage_X();
 	};
@@ -64,13 +64,13 @@ void Touch::ReadCoordinates(void)
 	uint16_t avx = 0;
 	uint16_t avy = 0;
 	
-	for(uint8_t i=0; i<5; i++){
+	for(uint8_t i=0; i<10; i++){
 		avx += tx[i];
 		avy += ty[i];
 	};
 	
-	avx /= 5;
-	avy /= 5;
+	avx /= 10;
+	avy /= 10;
 	
 	
 	y = rescale_y(avy);

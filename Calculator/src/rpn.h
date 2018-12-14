@@ -8,7 +8,6 @@
 #include <math.h>
 #include <array.h>
 
-#include <delay.h>
 #include <text.h>
 
 #define ONP_CT_UNDEF	0
@@ -105,7 +104,7 @@ public:
 	RPN():tkcnt(0),results(0.0)
 	{};
 	
-	double infix_to_postfix(array<uint8_t>& r);
+	double TryCalculate(array<uint8_t>& r);
 	
 	uint8_t tokenizer(array<uint8_t>& r);
 	

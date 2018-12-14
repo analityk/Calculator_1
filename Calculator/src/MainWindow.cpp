@@ -86,6 +86,59 @@ void MainWindow::Draw(void)
 	for( uint8_t i=0; i<60; i+=4 ){
 		Lcd_KS0108.SetPixel(126, 3+i);
 	};
+	
+	uint8_t letter = ActColumn();
+	uint8_t row = ActLine();
+	
+	uint8_t adrc = (row * 10) + letter;
+	
+	double pd[4];
+	
+	pd[0] = pc[adrc].result;
+	pd[1] = pc[(adrc+1) * 10].result;
+	pd[2] = pc[adrc+1].result;
+	pd[3] = pc[((adrc+1)*10)+1].result;
+	
+	uint8_t tab[4][20];
+	
+
+	for(uint8_t i=0; i<4; i++){
+		FormatOutput(&pd[i], tab[i]);
+	};
+	//
+	Text.GoToAbs(10, 2);
+	Text.Write(tab[0]);
+	Text.GoToAbs(10, 5);
+	Text.Write(tab[1]);
+	//Text.GoToAbs(65, 2);
+	//Text.Write(tb0);
+	//Text.GoToAbs(65, 5);
+	//Text.Write(tb1);
+		
+};
+
+
+void MainWindow::FormatOutput(double* pd, uint8_t* ps)
+{
+	uint8_t te[20], tf[20];
+	
+	if( (*pd > 9999999.9) || (*pd < -999999.9) ){
+		dtostre(*pd, (char*)(ps), 4, 0);
+		return;	
+	};
+	
+	if( (*pd <= 999999.9) && (*pd > 0.0001) ){
+		dtostrf(*pd, 6, 6, (char*)(ps));
+		return;
+	};
+	
+	if( (*pd >= -999999.9) && (*pd < -0.0001) ){
+		dtostrf(*pd, 6, 6, (char*)(ps));
+		return;
+	};
+	
+	dtostre(*pd, (char*)(ps), 4, 0);
+	
 };
 
 uint8_t MainWindow::ReadKey(void)
