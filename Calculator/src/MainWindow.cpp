@@ -110,34 +110,64 @@ void MainWindow::Draw(void)
 	Text.Write(tab[0]);
 	Text.GoToAbs(10, 5);
 	Text.Write(tab[1]);
-	//Text.GoToAbs(65, 2);
-	//Text.Write(tb0);
-	//Text.GoToAbs(65, 5);
-	//Text.Write(tb1);
+	Text.GoToAbs(65, 2);
+	Text.Write(tab[2]);
+	Text.GoToAbs(65, 5);
+	Text.Write(tab[3]);
 		
 };
 
-
 void MainWindow::FormatOutput(double* pd, uint8_t* ps)
 {
-	uint8_t te[20], tf[20];
-	
 	if( (*pd > 9999999.9) || (*pd < -999999.9) ){
 		dtostre(*pd, (char*)(ps), 4, 0);
 		return;	
 	};
 	
-	if( (*pd <= 999999.9) && (*pd > 0.0001) ){
-		dtostrf(*pd, 6, 6, (char*)(ps));
+	if( (*pd > 999999.9) || (*pd < -99999.9) ){
+		dtostrf(*pd, 6, 0, (char*)(ps));
 		return;
 	};
 	
-	if( (*pd >= -999999.9) && (*pd < -0.0001) ){
-		dtostrf(*pd, 6, 6, (char*)(ps));
+	if( (*pd > 99999.99)||(*pd < -9999.99) ){
+		dtostrf(*pd, 6, 1, (char*)(ps));
 		return;
 	};
 	
-	dtostre(*pd, (char*)(ps), 4, 0);
+	if( (*pd > 9999.999) || (*pd < -999.999) ){
+		dtostrf(*pd, 6, 2, (char*)(ps));
+		return;
+	};
+	
+	if( (*pd > 999.9999) || (*pd < -99.9999) ){
+		dtostrf(*pd, 6, 3, (char*)(ps));
+		return;
+	};
+	
+	if( (*pd > 99.99999) || (*pd < -9.99999) ){
+		dtostrf(*pd, 6, 4, (char*)(ps));
+		return;
+	};
+	
+	if( (*pd > 9.999999) || (*pd < -0.0099999) ){
+		dtostrf(*pd, 6, 5, (char*)(ps));
+		return;
+	};
+	
+	if(*pd > 0.00099999){
+		dtostrf(*pd, 6, 6, (char*)(ps));
+		return;
+	};	
+	
+	if( (*pd > 0.0) || (*pd < 0.0) ){
+		dtostre(*pd, (char*)(ps), 4, 0);
+		return;
+	};
+	
+	if(*pd == 0.0){
+		strcpy((char*)(ps), "   0.0 ");
+		return;
+	};
 	
 };
 

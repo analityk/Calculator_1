@@ -26,8 +26,14 @@ public:
 	};
 	
 	void Store(array<uint8_t>* inpstr){
-		ram.write_block(rg_string, 0, inpstr->size(), inpstr->data);
-		result = rpn.TryCalculate(*inpstr);
+		if(inpstr->cnts() > 0){
+			ram.write_block(rg_string, 0, inpstr->size(), inpstr->data);
+			result = rpn.TryCalculate(*inpstr);
+		}else{
+			ram.clr_block(rg_string, 100);
+			result = 0.0;
+		};
+		
 	};
 	
 	void Load(array<uint8_t>* inpstr){

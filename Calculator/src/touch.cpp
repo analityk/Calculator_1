@@ -38,12 +38,12 @@ void Touch::wait_release_key(void)
 
 void Touch::KeyPressed(void)
 {
-	while( ( Adc.current_X() + Adc.current_Y() ) < 670 ){};
+	while( ( Adc.current_X() + Adc.current_Y() ) < 630 ){};
 }
 
 bool Touch::Press(void)
 {
-	if( Adc.current_X() + Adc.current_Y() < 670 ){
+	if( Adc.current_X() + Adc.current_Y() < 630 ){
 		return true;
 	};
 	return false;
@@ -55,6 +55,8 @@ void Touch::ReadCoordinates(void)
 	uint16_t ty[10];
 	
 	KeyPressed();
+	
+	delay(0xFFF);
 	
 	for(uint8_t i=0; i<10; i++){
 		tx[i] = Adc.voltage_Y();
